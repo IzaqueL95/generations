@@ -11,7 +11,7 @@ PRIMARY KEY (id),
 FOREIGN KEY (massa_tipo_id) references tb_categoria(id));
 
 INSERT INTO tb_categoria (massa_tipo,sabor_unico,para_entrega) VALUES
-("FINA","SIM","SIM"),
+("FINA","SIM","SIM"), -- 1
 ("MEDIA","NAO","NAO"),
 ("FINA","NAO","SIM"),
 ("GROSSA","SIM","SIM"),
