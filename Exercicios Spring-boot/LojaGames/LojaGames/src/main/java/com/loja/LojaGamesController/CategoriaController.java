@@ -2,6 +2,7 @@ package com.loja.LojaGamesController;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,55 +16,52 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.loja.LojaGames.Model.Categoria;
 
-import com.loja.LojaGames.Model.Produto;
-import com.loja.LojaGames.Repository.ProdutoRepository;
-
+import com.loja.LojaGames.Repository.CategoriaRepository;
 
 @RestController
-@RequestMapping("/produto")
+@RequestMapping("/categoria")
 @CrossOrigin("*")
-public class ProdutoController {
 
-	@Autowired 
-	private ProdutoRepository repository;
+public class CategoriaController {
+	
+	@Autowired CategoriaRepository repository;
 	
 	@GetMapping
-	public ResponseEntity<List<Produto>> Getall ()
+	public ResponseEntity<List<Categoria>> Getall ()
 	{
 		return ResponseEntity.ok(repository.findAll());
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Produto> GetById(@PathVariable Long id)
+	public ResponseEntity<Categoria> GetById (@PathVariable long id)
 	{
-		return repository.findById(id)
-				.map(resp -> ResponseEntity.ok(resp))
+		return repository.findById(id).map(resp -> ResponseEntity.ok(resp))
 				.orElse(ResponseEntity.notFound().build());
 	}
-
-	@GetMapping("/nome/{nome}")
-	public ResponseEntity<List<Produto>> GetByNome(@PathVariable String nome)
+	@GetMapping("/descricao/{descricao}")
+	public ResponseEntity<List<Categoria>> GetByDescricao(@PathVariable String descricao)
 	{
-		return ResponseEntity.ok(repository.findAllByNomeContaining(nome));
+		return ResponseEntity.ok(repository.findAllByDescricaoContaining(descricao));
 	}
 	
-	@GetMapping("/preco/{preco}")
-	public ResponseEntity<List<Produto>> GetByPreco(@RequestBody Float preco)
+	@GetMapping("/genero/{genero}")
+	public ResponseEntity<List<Categoria>> GetBygenero(@PathVariable String genero)
 	{
-		return ResponseEntity.ok(repository.findAllByPrecoContaining(preco));
+		return ResponseEntity.ok(repository.findAllByDescricaoContaining(genero));
 	}
-	
 	
 	@PostMapping
-	public ResponseEntity<Produto> post (@RequestBody Produto produto)
+	public ResponseEntity<Categoria> post (@RequestBody Categoria categoria)
 	{
-		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(produto));
+		return ResponseEntity.status(HttpStatus.CREATED)
+				.body(repository.save(categoria));
 	}
 	@PutMapping
-	public ResponseEntity<Produto> put (@RequestBody Produto produto)
+	public ResponseEntity<Categoria> put (@RequestBody Categoria categoria)
 	{
-		return ResponseEntity.ok(repository.save(produto));
+		return ResponseEntity.ok(repository.save(categoria));
 	}
 	
 	@DeleteMapping("/{id}")
@@ -71,6 +69,4 @@ public class ProdutoController {
 	{
 		repository.deleteById(id);
 	}
-	
-	
 }
