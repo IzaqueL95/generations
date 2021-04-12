@@ -39,6 +39,7 @@ public class BasicSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 		.antMatchers("/usuarios/logar").permitAll()
 		.antMatchers("/usuarios/cadastrar").permitAll()
+		
 		.anyRequest().authenticated() // serve para dizer que as demais requisições deverão ser autenticadas.
 		.and().httpBasic() //serve para usar o padrão basic para gerar a chave/token
 		.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) //vai indicar o tipo de sessão usada
