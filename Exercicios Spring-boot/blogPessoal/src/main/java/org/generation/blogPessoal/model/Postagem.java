@@ -7,7 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -43,38 +42,62 @@ public class Postagem {
 	@JsonIgnoreProperties("postagem") //Json ignora certas coisas que eu não quero retornar na busca da tabela, ex: uma senha não deveria ser retornada.
 	private Tema tema;
 	
+	@ManyToOne
+	@JsonIgnoreProperties("postagem") 
+	private Usuario usuario;
 	
 	
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
 	public long getId() {
 		return id;
 	}
+
 	public void setId(long id) {
 		this.id = id;
 	}
+
 	public String getTitulo() {
 		return titulo;
 	}
+
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
+
 	public String getTexto() {
 		return texto;
 	}
+
 	public void setTexto(String texto) {
 		this.texto = texto;
 	}
-	public Date getDate() {
+
+	public Date getData() {
 		return data;
 	}
-	public void setDate(Date data) {
+
+	public void setData(Date data) {
 		this.data = data;
 	}
+
 	public Tema getTema() {
 		return tema;
 	}
+
 	public void setTema(Tema tema) {
 		this.tema = tema;
 	}
+	
+
+	
 	
 	
 	
